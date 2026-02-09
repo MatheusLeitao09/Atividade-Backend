@@ -3,9 +3,9 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+   provider = "sqlite"
+   url      = env("DATABASE_URL")
 }
-
 model Food {
     id        Int      @id @default(autoincrement())
     name    String

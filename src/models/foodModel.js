@@ -8,9 +8,11 @@ export const findAll = async (filters = {}) => {
     const { name, description, price, category, available } = filters;
     const where = {};
 
-    if (name) where.name = { contains: name, mode: 'insensitive' };
-    if (description) where.description = { contains: description, mode: 'insensitive' };
-    if (category) where.category = { contains: category, mode: 'insensitive' };
+    //Não consigo usar o insensitive pois o SQlite não suporta ele
+
+    if (name) where.name = { contains: name,};
+    if (description) where.description = { contains: description };
+    if (category) where.category = { contains: category };
     if (price !== undefined) where.price = parseFloat(price);
     if (available !== undefined) where.available =available === 'true' || available === true;
 

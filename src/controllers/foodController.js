@@ -30,8 +30,14 @@ export const create = async (req, res) => {
         if (!description) return res.status(400).json({ error: 'A descrição é obrigatória!' });
         if (!price) return res.status(400).json({ error: 'O preço (preco) é obrigatório!' });
         if (!category) return res.status(400).json({ error: 'A categoria é obrigatória!' });
-    
-        const validaCategoria = ['lanches', 'pizzas', 'bebidas', 'sobremesas', 'churrasco'];
+        
+        if(price < 0) {
+            return res.status(400).json({error: 'O preço deve ser um valor positivo!'});
+        };
+        
+        if(category !== 'Lanches' && category !== 'Bebidas' && category !== 'Pizzas' && category !== 'Sobremesas' && category !== 'Churrasco') {
+            return res.status(400).json({ error: 'A categoria deve ser Bebidas, ou Pizzas, ou Sobremesas, ou Churrasco.'});
+        }
        
 
         const data = await model.create({
